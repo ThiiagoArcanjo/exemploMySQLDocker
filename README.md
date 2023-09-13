@@ -1,4 +1,4 @@
-# Docker básico de MySQL Com docker
+# Docker básico de MySQL.
 
 ## Como usar? 
 
