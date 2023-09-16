@@ -11,13 +11,23 @@ services:
     volumes:
       - mysql:/var/lib/mysql/
     env_file:
-       - ./config/db.env
+      - ./config/db.env
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    networks:
+      - thiago_network
+    environment:
+      - PMA_ARBITRARY=1
+
 volumes:
   mysql:
   persistent:
 
-
 networks:
   thiago_network:
     external: true
-  
