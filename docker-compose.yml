@@ -3,15 +3,15 @@ version: "4.22.1"
 services:
   mysql:
     image: mysql:latest
-    command: ["mysqld", "--mysql-native-password=ON"]
-    
+    command: [ "mysqld", "--mysql-native-password=ON" ]
+
     container_name: mysql
     ports:
       - "3307:3306"
     networks:
       - pmfr-network
     volumes:
-      - /home/otavio/workspace/database/exemploMySQLDocker/mysql:/var/lib/mysql/
+      - ${CAMINHO_PASTA_MYSQL}:/var/lib/mysql/
     env_file:
       - ./config/db.env
 

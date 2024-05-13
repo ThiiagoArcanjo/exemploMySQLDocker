@@ -10,9 +10,10 @@
 
 * 4 - Copie e cole o arquivo dbcopy.env na mesma pasta e renomeio para db.env
 
-* 5 - Abra o arquivo recém renomeado db.env e mude as variaveis de ambiente de acordo com a sua preferencia.
 
-* 7 - Na pasta do projeto use docker compose up -d para subir o servidor e docker compose down para para-lo.
+* 5 - Abra o arquivo recém renomeado db.env e mude as variaveis de ambiente de acordo com a sua preferencia, obs: o caminho da pasta é a pasta mysql que você criou para o caminho.
+
+* 7 - Na pasta do projeto use docker compose --env-file ./config/db.env up para subir o servidor e docker compose down para para-lo.
 
 ## Como acessar esse servidor? O.O
 * Para acessar no workbanch basta usar o seu localhost(127.0.0.1) na porta 3307, mas somente fora do container(do seu host para o container). Se for acessar o BD por outra aplicação, caso esteja na rede que você criou, basta usar a porta 3306(propria do mysql).
