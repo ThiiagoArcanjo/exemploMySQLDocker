@@ -10,8 +10,7 @@
 
 * 4 - Copie e cole o arquivo dbcopy.env na mesma pasta e renomeio para db.env
 
-
-* 5 - Abra o arquivo recém renomeado db.env e mude as variaveis de ambiente de acordo com a sua preferencia, obs: o caminho da pasta é a pasta mysql que você criou para o caminho.
+* 5 - Abra o arquivo recém renomeado db.env e mude as variaveis de ambiente de acordo com a sua preferência, obs: o caminho da pasta é a pasta mysql que você criou.
 
 * 7 - Na pasta do projeto use docker compose --env-file ./config/db.env up para subir o servidor e docker compose down para para-lo.
 
