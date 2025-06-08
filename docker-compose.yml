@@ -1,19 +1,25 @@
-version: "4.22.1"
-
 services:
   mysql:
-    image: mysql:latest
-    command: ["mysqld", "--mysql-native-password=ON"]
-
+    image: mysql:8.0
     container_name: mysql
     ports:
       - "3307:3306"
     networks:
       - pmfr-network
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     volumes:
       - ${CAMINHO_PASTA_MYSQL}:/var/lib/mysql/
-    env_file:
-      - ./config/db.env
+      - ./mysql-custom.cnf:/etc/mysql/conf.d/custom.cnf  # Arquivo de configuração personalizado
+    healthcheck:  # Adicionado para verificar se o MySQL está pronto
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 20s
+      retries: 5
+      start_period: 30s                   # Aumentado para inicialização mais lenta
+    restart: unless-stopped
 
   phpmyadmin:
     image: phpmyadmin
@@ -23,12 +29,14 @@ services:
     networks:
       - pmfr-network
     environment:
-      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql  # Conecta ao container do MySQL pelo nome do serviço
+      #- PMA_USER=${MYSQL_USER}  # Lê do db.env (ou defina diretamente aqui) //sem login automatico
+      #- PMA_PASSWORD=${MYSQL_PASSWORD} //Sem login automatico
 
-volumes:
-  mysql:
-  persistent:
-
+    depends_on:
+      mysql:
+        condition: service_healthy  # Só inicia após MySQL estar pronto
+    restart: unless-stopped
 
 networks:
   pmfr-network:

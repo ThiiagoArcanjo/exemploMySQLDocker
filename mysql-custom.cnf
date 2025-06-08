@@ -1,0 +1,17 @@
+[mysqld]
+# Configurações essenciais para bancos médios/grandes
+max_allowed_packet=512M
+innodb_buffer_pool_size=2G
+innodb_log_file_size=512M
+innodb_file_per_table=ON
+innodb_flush_method=O_DIRECT
+
+# Otimizações básicas
+tmp_table_size=256M
+max_heap_table_size=256M
+table_open_cache=2000
+
+# Configurações padrão
+character-set-server=utf8mb4
+collation-server=utf8mb4_unicode_ci
+skip-name-resolve
